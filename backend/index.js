@@ -1,13 +1,39 @@
 
 
 import express from 'express'
+import cors from 'cors';
+
+
+// Models
+import UserModel from './Models/UserSchema';
 
 
 const app = express();
 
 
-app.get("/",(req,res)=>{
-    return res.send("Hello")
+
+
+
+
+app.use(cors());
+app.use(express.json());
+
+
+
+
+
+// API : http://localhost:5000/registeruser
+// METHOD : POST
+// DESCRIPTION: NEW USER CREATION IN DB
+
+app.post("/registeruser",(req,res)=>{
+
+    const {UserName,UserEmail,UserPassword} =req.body;
+
+    
+   
+
+    return res.status(200).json({"message":"User Successfully Created !!"})
 })
 
 
