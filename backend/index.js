@@ -4,8 +4,7 @@ import express from 'express'
 import cors from 'cors';
 
 
-// Models
-import UserModel from './Models/UserSchema';
+import UserSchema from './Models/UserSchema.js'
 
 
 const app = express();
@@ -26,12 +25,17 @@ app.use(express.json());
 // METHOD : POST
 // DESCRIPTION: NEW USER CREATION IN DB
 
-app.post("/registeruser",(req,res)=>{
+app.post("/registeruser",async(req,res)=>{
 
     const {UserName,UserEmail,UserPassword} =req.body;
 
-    
+  const ResonseRegisterData =  await UserSchema.create({
+        UserName,
+        UserName,
+        UserPassword
+    });
    
+    console.log(ResonseRegisterData)
 
     return res.status(200).json({"message":"User Successfully Created !!"})
 })

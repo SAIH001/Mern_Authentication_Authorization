@@ -16,9 +16,16 @@ const UserSchema = mongoose.Schema({
     }
 })
 
+// ES MODULE  IMPORT  , EXPORT DEFAULT
+
+export default mongoose.model("RegisterUser", UserSchema);
 
 
 
-const UserModel = mongoose.model("User",UserSchema)
+// COMMON JS MODULE.EXPORT
 
-module.exports = UserModel
+// module.exports = mongoose.model("RegisterUser",UserSchema);
+
+
+
+
