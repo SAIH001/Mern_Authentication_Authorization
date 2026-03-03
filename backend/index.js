@@ -6,6 +6,8 @@ import cors from 'cors';
 
 import UserSchema from './Models/UserSchema.js'
 
+import connectiondb from './Configuration/dbConnection.js';
+
 
 const app = express();
 
@@ -43,5 +45,6 @@ app.post("/registeruser",async(req,res)=>{
 
 
 app.listen(5000,()=>{
+    connectiondb();
     console.log("server running on port 5000")
 })
