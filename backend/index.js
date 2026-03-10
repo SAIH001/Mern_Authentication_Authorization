@@ -66,6 +66,16 @@ app.get("/getuser",async(req,res)=>{
 
 
 
+// API : http://localhost:5000/deleteuser/:id
+// METHOD : Delete
+// DESCRIPTION: Delete User
+
+app.get("/getuser",async(req,res)=>{
+
+
+})
+
+
 app.listen(5000,()=>{
     connectiondb();
     console.log("server running on port 5000")
