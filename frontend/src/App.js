@@ -12,6 +12,7 @@ import Navbar from './Component/Navbar';
 
 //-- CSS
 import './App.css'
+import Users from './Pages/Users';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </BrowserRouter>
   )

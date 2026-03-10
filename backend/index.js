@@ -33,13 +33,35 @@ app.post("/registeruser",async(req,res)=>{
 
   const ResonseRegisterData =  await UserSchema.create({
         UserName,
-        UserName,
+        UserEmail,
         UserPassword
     });
    
     console.log(ResonseRegisterData)
 
     return res.status(200).json({"message":"User Successfully Created !!"})
+})
+
+
+
+// API : http://localhost:5000/getuser
+// METHOD : GET
+// DESCRIPTION: GET ALL USER DATA FROM MONGO
+
+app.get("/getuser",async(req,res)=>{
+
+   
+
+  const GET_ALL_USER_Data =  await UserSchema.find();
+    
+  
+
+    return res.status(200).json(
+        {
+            "message":"All users Fetch Successfully !!",
+            "Data":GET_ALL_USER_Data
+    }
+    )
 })
 
 

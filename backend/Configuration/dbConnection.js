@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 
 const connectiondb = async()=>{
-   const connectDB =  await mongoose.connect("mongodb+srv://syedaliimran:12345ali@todoapp.b2dolkp.mongodb.net/?appName=TodoApp");
+   const connectDB =  await mongoose.connect("mongodb+srv://aliimran:aliimran@todo.pq4zmsn.mongodb.net/?appName=TODO");
 }
 
 
