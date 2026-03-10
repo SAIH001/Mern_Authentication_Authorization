@@ -70,7 +70,24 @@ app.get("/getuser",async(req,res)=>{
 // METHOD : Delete
 // DESCRIPTION: Delete User
 
-app.get("/getuser",async(req,res)=>{
+app.delete("/deleteuser/:id",async(req,res)=>{
+
+    const DeleteHuneWalaUser = req.params.id;
+
+   const UserAvailable = await UserSchema.findByIdAndDelete(DeleteHuneWalaUser);
+
+
+   if(!UserAvailable){
+    return res.status(404).json({
+        "error":"User Not Found"
+    })
+   }
+
+
+   return res.status(200).json({
+    "message":"User Deleted Successfully !",
+    "data":UserAvailable
+   })
 
 
 })
