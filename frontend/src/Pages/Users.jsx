@@ -51,7 +51,17 @@ const Users = () => {
 
   const UpdateUserFunc = async () => {
 
-      console.log(UpdateUser);
+    const Response = await fetch(`http://localhost:5000/updateuser/${UpdateUser}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+
+      },
+      body: JSON.stringify({
+        UserName , UserEmail, UserPassword
+      })
+
+    })
   
     }
 

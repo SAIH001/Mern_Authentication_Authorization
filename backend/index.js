@@ -93,6 +93,48 @@ app.delete("/deleteuser/:id",async(req,res)=>{
 })
 
 
+
+
+
+// API : http://localhost:5000/updateuser/:id
+// METHOD : Update
+// DESCRIPTION: Update  User
+
+app.put("/updateuser/:id",async(req,res)=>{
+
+    const UpdateHuneWalaUser = req.params.id;
+
+
+    // const {UserName, UserEmail, UserPassword}  = req.body;
+
+    console.log(`Update hune wala user ki id  : ${UpdateHuneWalaUser}`);
+
+
+    // await Model.findByIdAndUpdate(id, updateData, { new: true });
+   const UserAvailable = await UserSchema.findByIdAndUpdate(UpdateHuneWalaUser,req.body);
+
+
+    console.log(`Update User Status : ${UserAvailable}`)
+
+
+
+//    if(!UserAvailable){
+//     return res.status(404).json({
+//         "error":"User Not Found"
+//     })
+//    }
+
+
+   return res.status(200).json({
+    "message":"User Update Successfully !",
+    "data":UserAvailable
+   })
+
+
+})
+
+
+
 app.listen(5000,()=>{
     connectiondb();
     console.log("server running on port 5000")
