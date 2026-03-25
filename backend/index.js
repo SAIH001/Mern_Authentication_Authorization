@@ -4,6 +4,10 @@ import express from 'express'
 import cors from 'cors';
 
 
+import JWT from "jsonwebtoken";
+//const JWT = require("jsonwebtoken")
+
+
 import UserSchema from './Models/UserSchema.js'
 
 import connectiondb from './Configuration/dbConnection.js';
@@ -11,15 +15,11 @@ import connectiondb from './Configuration/dbConnection.js';
 
 const app = express();
 
-
-
-
+const secretkey="abcd_Kuch_bhi";
 
 
 app.use(cors());
 app.use(express.json());
-
-
 
 
 
@@ -132,6 +132,61 @@ app.put("/updateuser/:id",async(req,res)=>{
 
 
 })
+
+
+
+
+// ---------------- Login API -----------------//
+
+// API : http://localhost:5000/login
+// METHOD : POST
+// DESCRIPTION: User Login Verification
+
+app.post("/login",async(req,res)=>{
+    
+    //const emailAbc = req.body.UserEmail
+    
+    const {UserEmail, UserPassword} = req.body;
+
+    const Login_Available = await UserSchema.findOne({UserEmail:UserEmail});
+
+
+    
+    const payload = {
+        userId:Login_Available._id,
+        username:Login_Available.UserName,
+        useremail:Login_Available.UserEmail
+    }
+    
+    
+    const Token = JWT.sign( payload , secretkey , {expiresIn:'1h'}   )
+
+    console.log(Token)
+    
+
+    return res.status(200).json({"message":"Login Successfull !!"})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
