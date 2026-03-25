@@ -150,21 +150,25 @@ app.post("/login",async(req,res)=>{
 
     const Login_Available = await UserSchema.findOne({UserEmail:UserEmail});
 
-
-    
-    const payload = {
-        userId:Login_Available._id,
-        username:Login_Available.UserName,
-        useremail:Login_Available.UserEmail
-    }
-    
-    
-    const Token = JWT.sign( payload , secretkey , {expiresIn:'1h'}   )
-
-    console.log(Token)
-    
-
-    return res.status(200).json({"message":"Login Successfull !!"})
+        if(Login_Available){
+            if(UserPassword ==Login_Available.UserPassword ){
+           
+            const payload = {
+                userId:Login_Available._id,
+                username:Login_Available.UserName,
+                useremail:Login_Available.UserEmail
+            }
+            const Token = JWT.sign( payload , secretkey , {expiresIn:'1h'}   )
+            
+            return res.status(200).json({"message":"Login Successfull !!" ,"token":Token})
+        } // if (login availabl password matching)
+        else{
+            return res.status(404).json({"error":"Some Error Occured try again later !!"})
+        }
+        } // if (login available check krne kelie)
+        else{
+            return res.status(404).json({"error":"Login not available !! try again"})
+        }
 })
 
 
