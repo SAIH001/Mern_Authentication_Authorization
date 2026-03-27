@@ -1,6 +1,8 @@
 import React from 'react'
+
 import { useState } from 'react';
 
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 const Login = () => {
 
     const [UserEmail, setUserEmail] = useState('');
@@ -9,8 +11,33 @@ const Login = () => {
   
     const handle_UserLogin = async(e) =>{
       e.preventDefault();
-      console.log(UserEmail);
-      console.log(UserPassword);
+     
+     
+      const Response_UserLogin = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        UserEmail,
+        UserPassword
+      })
+    })
+      const res =await Response_UserLogin.json()
+
+      if(Response_UserLogin.status == 404){
+        toast.error(res.error)
+      }else if(Response_UserLogin.status == 200){
+        toast.success(res.message)
+
+      }
+    
+    
+  
+
+
+
+
     }
 
 
@@ -35,6 +62,21 @@ const Login = () => {
         <button type="submit" className="btn btn-primary">Login</button>
 
       </form>
+
+
+           <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+              transition={Bounce}
+            />
     </div>
   )
 }

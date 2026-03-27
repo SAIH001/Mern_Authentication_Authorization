@@ -34,7 +34,8 @@ app.post("/registeruser",async(req,res)=>{
   const ResonseRegisterData =  await UserSchema.create({
         UserName,
         UserEmail,
-        UserPassword
+        UserPassword,
+        UserRole:"customer"
     });
    
     console.log(ResonseRegisterData)
@@ -156,14 +157,15 @@ app.post("/login",async(req,res)=>{
             const payload = {
                 userId:Login_Available._id,
                 username:Login_Available.UserName,
-                useremail:Login_Available.UserEmail
+                useremail:Login_Available.UserEmail,
+                userrole:Login_Available.UserRole
             }
             const Token = JWT.sign( payload , secretkey , {expiresIn:'1h'}   )
             
             return res.status(200).json({"message":"Login Successfull !!" ,"token":Token})
         } // if (login availabl password matching)
         else{
-            return res.status(404).json({"error":"Some Error Occured try again later !!"})
+            return res.status(404).json({"error":"Login Fail !!"})
         }
         } // if (login available check krne kelie)
         else{

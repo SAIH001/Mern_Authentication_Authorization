@@ -13,7 +13,11 @@ const UserSchema = mongoose.Schema({
     UserPassword:{
         type:String,
         
-    }
+    },
+    UserRole:{
+        type:String,
+        
+    },
 })
 
 // ES MODULE  IMPORT  , EXPORT DEFAULT
